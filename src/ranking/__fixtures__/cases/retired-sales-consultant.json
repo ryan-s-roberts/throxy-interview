@@ -1,0 +1,21 @@
+{
+  "id": "retired-sales-consultant",
+  "description": "Retired sales consultant \u2014 not employed hard exclude",
+  "spec_refs": [
+    "Who NOT to Contact > Hard Exclusions"
+  ],
+  "employee_range": "10001+",
+  "job_title": "Retired Sales Consultant",
+  "features": {
+    "seniority": "ic",
+    "function": "sales",
+    "primary_target": "none",
+    "soft_exclude_role": "none",
+    "is_decision_maker": false,
+    "is_champion_only": false,
+    "is_assistant_or_support": false,
+    "is_employed": false,
+    "company_kind": "manufacturer_employer",
+    "parse_confidence": 0.88
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "smb-president-bwise",
+  "description": "SMB President at software company \u2014 not hard-excluded at SMB; soft title fit",
+  "spec_refs": [
+    "Lead Targeting by Company Size",
+    "Seniority Relevance Matrix"
+  ],
+  "employee_range": "51-200",
+  "job_title": "President",
+  "features": {
+    "seniority": "cLevel",
+    "function": "executive",
+    "primary_target": "owner_president",
+    "soft_exclude_role": "none",
+    "is_decision_maker": true,
+    "is_champion_only": false,
+    "is_assistant_or_support": false,
+    "is_employed": true,
+    "company_kind": "b2b_vendor",
+    "parse_confidence": 0.88
+  }
+}

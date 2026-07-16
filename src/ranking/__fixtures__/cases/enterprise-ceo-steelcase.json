@@ -1,0 +1,21 @@
+{
+  "id": "enterprise-ceo-steelcase",
+  "description": "Enterprise CEO at large manufacturer \u2014 contextual CEO hard exclude",
+  "spec_refs": [
+    "Who NOT to Contact > Hard Exclusions"
+  ],
+  "employee_range": "10001+",
+  "job_title": "Chief Executive Officer",
+  "features": {
+    "seniority": "cLevel",
+    "function": "executive",
+    "primary_target": "ceo",
+    "soft_exclude_role": "none",
+    "is_decision_maker": true,
+    "is_champion_only": false,
+    "is_assistant_or_support": false,
+    "is_employed": true,
+    "company_kind": "manufacturer_employer",
+    "parse_confidence": 0.9
+  }
+}

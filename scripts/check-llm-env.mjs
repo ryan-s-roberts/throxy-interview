@@ -1,0 +1,40 @@
+import fs from "node:fs";
+import path from "node:path";
+import { PROVIDER_ENV_VARS } from "../src/ranking/llm/provider-env.mjs";
+
+function loadEnvFile(filePath) {
+  if (!fs.existsSync(filePath)) return;
+  const lines = fs.readFileSync(filePath, "utf8").split("\n");
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const eq = trimmed.indexOf("=");
+    if (eq === -1) continue;
+    const key = trimmed.slice(0, eq).trim();
+    let value = trimmed.slice(eq + 1).trim();
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+    if (!(key in process.env)) {
+      process.env[key] = value;
+    }
+  }
+}
+
+const root = path.resolve(import.meta.dirname, "..");
+loadEnvFile(path.join(root, ".env"));
+loadEnvFile(path.join(root, ".env.local"));
+
+const configured = PROVIDER_ENV_VARS.some((name) => Boolean(process.env[name]));
+
+if (!configured) {
+  console.error(
+    `LLM provider not configured. Set one of ${PROVIDER_ENV_VARS.join(", ")} in .env.local`,
+  );
+  process.exit(1);
+}
+
+console.log("LLM environment configured.");

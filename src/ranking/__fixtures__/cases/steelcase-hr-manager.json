@@ -1,0 +1,21 @@
+{
+  "id": "steelcase-hr-manager",
+  "description": "HR manager at enterprise manufacturer \u2014 hard exclude by function",
+  "spec_refs": [
+    "Who NOT to Contact > Hard Exclusions"
+  ],
+  "employee_range": "10001+",
+  "job_title": "Manager, Human Resources",
+  "features": {
+    "seniority": "manager",
+    "function": "hr",
+    "primary_target": "none",
+    "soft_exclude_role": "none",
+    "is_decision_maker": false,
+    "is_champion_only": false,
+    "is_assistant_or_support": false,
+    "is_employed": true,
+    "company_kind": "manufacturer_employer",
+    "parse_confidence": 0.9
+  }
+}

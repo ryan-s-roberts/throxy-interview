@@ -1,0 +1,733 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`rule engine evidence chains > case allie-cro-startup produces stable evidence chain 1`] = `
+"# case: allie-cro-startup
+# CRO at startup B2B vendor — sales leadership positive
+# band: startup
+
+── parse.lead [SKIPPED IN FIXTURE] ──────────────────────────
+  seniority: cLevel
+  function: sales
+  primary_target: cro
+  soft_exclude_role: none
+  is_decision_maker: true
+  is_champion_only: false
+  is_assistant_or_support: false
+  is_employed: true
+  company_kind: b2b_vendor
+  parse_confidence: 0.93
+
+── lookup.size_band ────────────────────────
+  in:  {"employee_range":"11-50"}
+  out: {"band":"startup","mapping_notes":"employee_range 11-50 maps to startup band"}
+  » employee_range 11-50 maps to startup band
+
+── rule.hard_exclude ───────────────────────
+  rule: persona.hard_exclude.function
+  ref:  Who NOT to Contact > Hard Exclusions
+  in:  {"features":{"seniority":"cLevel","function":"sales","primary_target":"cro","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.93},"band":"startup"}
+  out: {"excluded":false}
+  » No hard exclusion rules matched
+
+── rule.soft_exclude ───────────────────────
+  rule: persona.soft_exclude
+  ref:  Who NOT to Contact > Soft Exclusions
+  in:  {"features":{"seniority":"cLevel","function":"sales","primary_target":"cro","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.93}}
+  out: {"applied":false}
+  » No soft exclusion roles matched
+
+── rule.title_priority ─────────────────────
+  rule: persona.title_priority
+  ref:  Lead Targeting by Company Size
+  in:  {"features":{"seniority":"cLevel","function":"sales","primary_target":"cro","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.93},"band":"startup"}
+  out: {"priority":1,"matched_target":null}
+  » No primary title target matched; default priority 1/5
+
+── rule.seniority_matrix ───────────────────
+  rule: persona.seniority_matrix
+  ref:  Seniority Relevance Matrix
+  in:  {"seniority":"cLevel","band":"startup"}
+  out: {"relevance":5}
+  » Seniority cLevel at startup → relevance 5/5
+
+── score.final ─────────────────────────────
+  rule: scoring.composite
+  ref:  derived
+  in:  {"rule_outputs":{"hard_exclude":{"excluded":false},"soft_exclude":{"applied":false},"title_priority":{"priority":1,"matched_target":null},"seniority_matrix":{"relevance":5},"champion_penalty":0,"low_confidence_penalty":false,"department_weight":5}}
+  out: {"relevant":true,"score":5}
+  » Composite: title=1/5 (×5), seniority=5/5 (×3), dept=5/5 (×1)
+
+── reasoning ─────────────────────────────────────────────────
+  Relevant · 5/10. C-level executive in sales at a startup B2B software vendor, and a likely decision-maker. Seniority is an excellent fit for this company size (5/5), and the department is a core fit (5/5). No disqualifying rules fired, but the score is held to 5 because the title did not match a priority outreach target (1/5)."
+`;
+
+exports[`rule engine evidence chains > case allie-founder-ceo produces stable evidence chain 1`] = `
+"# case: allie-founder-ceo
+# Startup founder/CEO at B2B vendor selling to manufacturing — strong positive
+# band: startup
+
+── parse.lead [SKIPPED IN FIXTURE] ──────────────────────────
+  seniority: founder
+  function: executive
+  primary_target: founder
+  soft_exclude_role: none
+  is_decision_maker: true
+  is_champion_only: false
+  is_assistant_or_support: false
+  is_employed: true
+  company_kind: b2b_vendor
+  parse_confidence: 0.95
+
+── lookup.size_band ────────────────────────
+  in:  {"employee_range":"11-50"}
+  out: {"band":"startup","mapping_notes":"employee_range 11-50 maps to startup band"}
+  » employee_range 11-50 maps to startup band
+
+── rule.hard_exclude ───────────────────────
+  rule: persona.hard_exclude.function
+  ref:  Who NOT to Contact > Hard Exclusions
+  in:  {"features":{"seniority":"founder","function":"executive","primary_target":"founder","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.95},"band":"startup"}
+  out: {"excluded":false}
+  » No hard exclusion rules matched
+
+── rule.soft_exclude ───────────────────────
+  rule: persona.soft_exclude
+  ref:  Who NOT to Contact > Soft Exclusions
+  in:  {"features":{"seniority":"founder","function":"executive","primary_target":"founder","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.95}}
+  out: {"applied":false}
+  » No soft exclusion roles matched
+
+── rule.title_priority ─────────────────────
+  rule: persona.title_priority
+  ref:  Lead Targeting by Company Size
+  in:  {"features":{"seniority":"founder","function":"executive","primary_target":"founder","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.95},"band":"startup"}
+  out: {"priority":5,"matched_target":"founder"}
+  » Matched target "Founder" with priority 5/5
+
+── rule.seniority_matrix ───────────────────
+  rule: persona.seniority_matrix
+  ref:  Seniority Relevance Matrix
+  in:  {"seniority":"founder","band":"startup"}
+  out: {"relevance":5}
+  » Seniority founder at startup → relevance 5/5
+
+── score.final ─────────────────────────────
+  rule: scoring.composite
+  ref:  derived
+  in:  {"rule_outputs":{"hard_exclude":{"excluded":false},"soft_exclude":{"applied":false},"title_priority":{"priority":5,"matched_target":"founder"},"seniority_matrix":{"relevance":5},"champion_penalty":0,"low_confidence_penalty":false,"department_weight":5}}
+  out: {"relevant":true,"score":9}
+  » Composite: title=5/5 (×5), seniority=5/5 (×3), dept=5/5 (×1)
+
+── reasoning ─────────────────────────────────────────────────
+  Relevant · 9/10. Founder in executive leadership at a startup B2B software vendor, and a likely decision-maker. It matches the "Founder" outreach target (5/5), and seniority is an excellent fit for this company size (5/5), and the department is a core fit (5/5). No disqualifying rules fired."
+`;
+
+exports[`rule engine evidence chains > case bizdev-vp-altizon produces stable evidence chain 1`] = `
+"# case: bizdev-vp-altizon
+# SMB VP Business Development — soft-fit relevant lead
+# band: smb
+
+── parse.lead [SKIPPED IN FIXTURE] ──────────────────────────
+  seniority: vp
+  function: bizDev
+  primary_target: none
+  soft_exclude_role: none
+  is_decision_maker: true
+  is_champion_only: false
+  is_assistant_or_support: false
+  is_employed: true
+  company_kind: b2b_vendor
+  parse_confidence: 0.85
+
+── lookup.size_band ────────────────────────
+  in:  {"employee_range":"51-200"}
+  out: {"band":"smb","mapping_notes":"employee_range 51-200 maps to smb band"}
+  » employee_range 51-200 maps to smb band
+
+── rule.hard_exclude ───────────────────────
+  rule: persona.hard_exclude.function
+  ref:  Who NOT to Contact > Hard Exclusions
+  in:  {"features":{"seniority":"vp","function":"bizDev","primary_target":"none","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.85},"band":"smb"}
+  out: {"excluded":false}
+  » No hard exclusion rules matched
+
+── rule.soft_exclude ───────────────────────
+  rule: persona.soft_exclude
+  ref:  Who NOT to Contact > Soft Exclusions
+  in:  {"features":{"seniority":"vp","function":"bizDev","primary_target":"none","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.85}}
+  out: {"applied":false}
+  » No soft exclusion roles matched
+
+── rule.title_priority ─────────────────────
+  rule: persona.title_priority
+  ref:  Lead Targeting by Company Size
+  in:  {"features":{"seniority":"vp","function":"bizDev","primary_target":"none","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.85},"band":"smb"}
+  out: {"priority":1,"matched_target":null}
+  » No primary title target matched; default priority 1/5
+
+── rule.seniority_matrix ───────────────────
+  rule: persona.seniority_matrix
+  ref:  Seniority Relevance Matrix
+  in:  {"seniority":"vp","band":"smb"}
+  out: {"relevance":5}
+  » Seniority vp at smb → relevance 5/5
+
+── score.final ─────────────────────────────
+  rule: scoring.composite
+  ref:  derived
+  in:  {"rule_outputs":{"hard_exclude":{"excluded":false},"soft_exclude":{"applied":false},"title_priority":{"priority":1,"matched_target":null},"seniority_matrix":{"relevance":5},"champion_penalty":0,"low_confidence_penalty":false,"department_weight":4}}
+  out: {"relevant":true,"score":5}
+  » Composite: title=1/5 (×5), seniority=5/5 (×3), dept=4/5 (×1)
+
+── reasoning ─────────────────────────────────────────────────
+  Relevant · 5/10. VP in business development at an SMB B2B software vendor, and a likely decision-maker. Seniority is an excellent fit for this company size (5/5), and the department is a core fit (4/5). No disqualifying rules fired, but the score is held to 5 because the title did not match a priority outreach target (1/5)."
+`;
+
+exports[`rule engine evidence chains > case elche-government-president produces stable evidence chain 1`] = `
+"# case: elche-government-president
+# Government official President at municipality — CEO/exec at enterprise hard exclude
+# band: enterprise
+
+── parse.lead [SKIPPED IN FIXTURE] ──────────────────────────
+  seniority: cLevel
+  function: executive
+  primary_target: owner_president
+  soft_exclude_role: none
+  is_decision_maker: true
+  is_champion_only: false
+  is_assistant_or_support: false
+  is_employed: true
+  company_kind: government
+  parse_confidence: 0.9
+
+── lookup.size_band ────────────────────────
+  in:  {"employee_range":"1001-5000"}
+  out: {"band":"enterprise","mapping_notes":"employee_range 1001-5000 maps to enterprise band"}
+  » employee_range 1001-5000 maps to enterprise band
+
+── rule.hard_exclude ───────────────────────
+  rule: persona.hard_exclude.ceo_enterprise
+  ref:  Who NOT to Contact > Hard Exclusions
+  in:  {"features":{"seniority":"cLevel","function":"executive","primary_target":"owner_president","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"government","parse_confidence":0.9},"band":"enterprise"}
+  out: {"excluded":true,"reason":"CEO/President too far removed at enterprise"}
+  » CEOs at enterprise companies do not own outbound execution
+
+── rule.soft_exclude ───────────────────────
+  rule: persona.soft_exclude
+  ref:  Who NOT to Contact > Soft Exclusions
+  in:  {"features":{"seniority":"cLevel","function":"executive","primary_target":"owner_president","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"government","parse_confidence":0.9}}
+  out: {"applied":false}
+  » No soft exclusion roles matched
+
+── rule.title_priority ─────────────────────
+  rule: persona.title_priority
+  ref:  Lead Targeting by Company Size
+  in:  {"features":{"seniority":"cLevel","function":"executive","primary_target":"owner_president","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"government","parse_confidence":0.9},"band":"enterprise"}
+  out: {"priority":1,"matched_target":null}
+  » No primary title target matched; default priority 1/5
+
+── rule.seniority_matrix ───────────────────
+  rule: persona.seniority_matrix
+  ref:  Seniority Relevance Matrix
+  in:  {"seniority":"cLevel","band":"enterprise"}
+  out: {"relevance":1}
+  » Seniority cLevel at enterprise → relevance 1/5
+
+── score.final ─────────────────────────────
+  rule: scoring.composite
+  ref:  derived
+  in:  {"rule_outputs":{"hard_exclude":{"excluded":true,"reason":"CEO/President too far removed at enterprise"},"soft_exclude":{"applied":false},"title_priority":{"priority":1,"matched_target":null},"seniority_matrix":{"relevance":1},"champion_penalty":0,"low_confidence_penalty":false,"department_weight":1}}
+  out: {"relevant":false,"score":0}
+  » Hard excluded: CEO/President too far removed at enterprise
+
+── reasoning ─────────────────────────────────────────────────
+  Not relevant. C-level executive in executive leadership at an enterprise government body, and a likely decision-maker. Excluded because CEOs at enterprise companies do not own outbound execution."
+`;
+
+exports[`rule engine evidence chains > case enterprise-ae-soft produces stable evidence chain 1`] = `
+"# case: enterprise-ae-soft
+# Enterprise Account Executive — soft exclusion (closer, not outbound owner)
+# band: enterprise
+
+── parse.lead [SKIPPED IN FIXTURE] ──────────────────────────
+  seniority: ic
+  function: sales
+  primary_target: none
+  soft_exclude_role: account_executive
+  is_decision_maker: false
+  is_champion_only: false
+  is_assistant_or_support: false
+  is_employed: true
+  company_kind: b2b_vendor
+  parse_confidence: 0.9
+
+── lookup.size_band ────────────────────────
+  in:  {"employee_range":"1001-5000"}
+  out: {"band":"enterprise","mapping_notes":"employee_range 1001-5000 maps to enterprise band"}
+  » employee_range 1001-5000 maps to enterprise band
+
+── rule.hard_exclude ───────────────────────
+  rule: persona.hard_exclude.function
+  ref:  Who NOT to Contact > Hard Exclusions
+  in:  {"features":{"seniority":"ic","function":"sales","primary_target":"none","soft_exclude_role":"account_executive","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.9},"band":"enterprise"}
+  out: {"excluded":false}
+  » No hard exclusion rules matched
+
+── rule.soft_exclude ───────────────────────
+  rule: persona.soft_exclude
+  ref:  Who NOT to Contact > Soft Exclusions
+  in:  {"features":{"seniority":"ic","function":"sales","primary_target":"none","soft_exclude_role":"account_executive","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.9}}
+  out: {"applied":true,"role":"account_executive","reason":"Account Executive — closer, not outbound owner"}
+  » Soft exclusion: Account Executive — closer, not outbound owner
+
+── rule.title_priority ─────────────────────
+  rule: persona.title_priority
+  ref:  Lead Targeting by Company Size
+  in:  {"features":{"seniority":"ic","function":"sales","primary_target":"none","soft_exclude_role":"account_executive","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.9},"band":"enterprise"}
+  out: {"priority":1,"matched_target":null}
+  » No primary title target matched; default priority 1/5
+
+── rule.seniority_matrix ───────────────────
+  rule: persona.seniority_matrix
+  ref:  Seniority Relevance Matrix
+  in:  {"seniority":"ic","band":"enterprise"}
+  out: {"relevance":1}
+  » Seniority ic at enterprise → relevance 1/5
+
+── score.final ─────────────────────────────
+  rule: scoring.composite
+  ref:  derived
+  in:  {"rule_outputs":{"hard_exclude":{"excluded":false},"soft_exclude":{"applied":true,"role":"account_executive","reason":"Account Executive — closer, not outbound owner"},"title_priority":{"priority":1,"matched_target":null},"seniority_matrix":{"relevance":1},"champion_penalty":0,"low_confidence_penalty":false,"department_weight":5}}
+  out: {"relevant":false,"score":0}
+  » Soft exclusion: Account Executive — closer, not outbound owner
+
+── reasoning ─────────────────────────────────────────────────
+  Not relevant. Individual contributor in sales at an enterprise B2B software vendor. Excluded because soft exclusion: Account Executive — closer, not outbound owner."
+`;
+
+exports[`rule engine evidence chains > case enterprise-ceo-steelcase produces stable evidence chain 1`] = `
+"# case: enterprise-ceo-steelcase
+# Enterprise CEO at large manufacturer — contextual CEO hard exclude
+# band: enterprise
+
+── parse.lead [SKIPPED IN FIXTURE] ──────────────────────────
+  seniority: cLevel
+  function: executive
+  primary_target: ceo
+  soft_exclude_role: none
+  is_decision_maker: true
+  is_champion_only: false
+  is_assistant_or_support: false
+  is_employed: true
+  company_kind: manufacturer_employer
+  parse_confidence: 0.9
+
+── lookup.size_band ────────────────────────
+  in:  {"employee_range":"10001+"}
+  out: {"band":"enterprise","mapping_notes":"employee_range 10001+ maps to enterprise band"}
+  » employee_range 10001+ maps to enterprise band
+
+── rule.hard_exclude ───────────────────────
+  rule: persona.hard_exclude.ceo_enterprise
+  ref:  Who NOT to Contact > Hard Exclusions
+  in:  {"features":{"seniority":"cLevel","function":"executive","primary_target":"ceo","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"manufacturer_employer","parse_confidence":0.9},"band":"enterprise"}
+  out: {"excluded":true,"reason":"CEO/President too far removed at enterprise"}
+  » CEOs at enterprise companies do not own outbound execution
+
+── rule.soft_exclude ───────────────────────
+  rule: persona.soft_exclude
+  ref:  Who NOT to Contact > Soft Exclusions
+  in:  {"features":{"seniority":"cLevel","function":"executive","primary_target":"ceo","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"manufacturer_employer","parse_confidence":0.9}}
+  out: {"applied":false}
+  » No soft exclusion roles matched
+
+── rule.title_priority ─────────────────────
+  rule: persona.title_priority
+  ref:  Lead Targeting by Company Size
+  in:  {"features":{"seniority":"cLevel","function":"executive","primary_target":"ceo","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"manufacturer_employer","parse_confidence":0.9},"band":"enterprise"}
+  out: {"priority":1,"matched_target":null}
+  » No primary title target matched; default priority 1/5
+
+── rule.seniority_matrix ───────────────────
+  rule: persona.seniority_matrix
+  ref:  Seniority Relevance Matrix
+  in:  {"seniority":"cLevel","band":"enterprise"}
+  out: {"relevance":1}
+  » Seniority cLevel at enterprise → relevance 1/5
+
+── score.final ─────────────────────────────
+  rule: scoring.composite
+  ref:  derived
+  in:  {"rule_outputs":{"hard_exclude":{"excluded":true,"reason":"CEO/President too far removed at enterprise"},"soft_exclude":{"applied":false},"title_priority":{"priority":1,"matched_target":null},"seniority_matrix":{"relevance":1},"champion_penalty":0,"low_confidence_penalty":false,"department_weight":1}}
+  out: {"relevant":false,"score":0}
+  » Hard excluded: CEO/President too far removed at enterprise
+
+── reasoning ─────────────────────────────────────────────────
+  Not relevant. C-level executive in executive leadership at an enterprise manufacturer, and a likely decision-maker. Excluded because CEOs at enterprise companies do not own outbound execution."
+`;
+
+exports[`rule engine evidence chains > case garbage-title-employed produces stable evidence chain 1`] = `
+"# case: garbage-title-employed
+# Garbage title with low confidence — conservative exclude path
+# band: enterprise
+
+── parse.lead [SKIPPED IN FIXTURE] ──────────────────────────
+  seniority: unknown
+  function: other
+  primary_target: none
+  soft_exclude_role: none
+  is_decision_maker: false
+  is_champion_only: false
+  is_assistant_or_support: false
+  is_employed: true
+  company_kind: manufacturer_employer
+  parse_confidence: 0.15
+
+── lookup.size_band ────────────────────────
+  in:  {"employee_range":"10001+"}
+  out: {"band":"enterprise","mapping_notes":"employee_range 10001+ maps to enterprise band"}
+  » employee_range 10001+ maps to enterprise band
+
+── rule.hard_exclude ───────────────────────
+  rule: persona.hard_exclude.function
+  ref:  Who NOT to Contact > Hard Exclusions
+  in:  {"features":{"seniority":"unknown","function":"other","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"manufacturer_employer","parse_confidence":0.15},"band":"enterprise"}
+  out: {"excluded":false}
+  » No hard exclusion rules matched
+
+── rule.soft_exclude ───────────────────────
+  rule: persona.soft_exclude
+  ref:  Who NOT to Contact > Soft Exclusions
+  in:  {"features":{"seniority":"unknown","function":"other","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"manufacturer_employer","parse_confidence":0.15}}
+  out: {"applied":false}
+  » No soft exclusion roles matched
+
+── rule.title_priority ─────────────────────
+  rule: persona.title_priority
+  ref:  Lead Targeting by Company Size
+  in:  {"features":{"seniority":"unknown","function":"other","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"manufacturer_employer","parse_confidence":0.15},"band":"enterprise"}
+  out: {"priority":1,"matched_target":null}
+  » No primary title target matched; default priority 1/5
+
+── rule.seniority_matrix ───────────────────
+  rule: persona.seniority_matrix
+  ref:  Seniority Relevance Matrix
+  in:  {"seniority":"unknown","band":"enterprise"}
+  out: {"relevance":0}
+  » Seniority unknown at enterprise → relevance 0/5
+
+── score.final ─────────────────────────────
+  rule: scoring.composite
+  ref:  derived
+  in:  {"rule_outputs":{"hard_exclude":{"excluded":false},"soft_exclude":{"applied":false},"title_priority":{"priority":1,"matched_target":null},"seniority_matrix":{"relevance":0},"champion_penalty":0,"low_confidence_penalty":true,"department_weight":1}}
+  out: {"relevant":false,"score":0}
+  » Low parse confidence with weak title match — conservative exclude
+
+── reasoning ─────────────────────────────────────────────────
+  Not relevant. Contact at an enterprise manufacturer. Excluded because low parse confidence with weak title match — conservative exclude."
+`;
+
+exports[`rule engine evidence chains > case inside-sales-startup produces stable evidence chain 1`] = `
+"# case: inside-sales-startup
+# Inside Sales at startup — champion multi-thread contact (no primary target)
+# band: startup
+
+── parse.lead [SKIPPED IN FIXTURE] ──────────────────────────
+  seniority: ic
+  function: salesDev
+  primary_target: none
+  soft_exclude_role: none
+  is_decision_maker: false
+  is_champion_only: true
+  is_assistant_or_support: false
+  is_employed: true
+  company_kind: b2b_vendor
+  parse_confidence: 0.8
+
+── lookup.size_band ────────────────────────
+  in:  {"employee_range":"11-50"}
+  out: {"band":"startup","mapping_notes":"employee_range 11-50 maps to startup band"}
+  » employee_range 11-50 maps to startup band
+
+── rule.hard_exclude ───────────────────────
+  rule: persona.hard_exclude.function
+  ref:  Who NOT to Contact > Hard Exclusions
+  in:  {"features":{"seniority":"ic","function":"salesDev","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":true,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.8},"band":"startup"}
+  out: {"excluded":false}
+  » No hard exclusion rules matched
+
+── rule.soft_exclude ───────────────────────
+  rule: persona.soft_exclude
+  ref:  Who NOT to Contact > Soft Exclusions
+  in:  {"features":{"seniority":"ic","function":"salesDev","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":true,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.8}}
+  out: {"applied":false}
+  » No soft exclusion roles matched
+
+── rule.title_priority ─────────────────────
+  rule: persona.title_priority
+  ref:  Lead Targeting by Company Size
+  in:  {"features":{"seniority":"ic","function":"salesDev","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":true,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.8},"band":"startup"}
+  out: {"priority":1,"matched_target":null}
+  » No primary title target matched; default priority 1/5
+
+── rule.seniority_matrix ───────────────────
+  rule: persona.seniority_matrix
+  ref:  Seniority Relevance Matrix
+  in:  {"seniority":"ic","band":"startup"}
+  out: {"relevance":0}
+  » Seniority ic at startup → relevance 0/5
+
+── score.final ─────────────────────────────
+  rule: scoring.composite
+  ref:  derived
+  in:  {"rule_outputs":{"hard_exclude":{"excluded":false},"soft_exclude":{"applied":false},"title_priority":{"priority":1,"matched_target":null},"seniority_matrix":{"relevance":0},"champion_penalty":2,"low_confidence_penalty":false,"department_weight":5}}
+  out: {"relevant":true,"score":1}
+  » Composite: title=1/5 (×5), seniority=0/5 (×3), dept=5/5 (×1)
+
+── reasoning ─────────────────────────────────────────────────
+  Relevant · 1/10. Individual contributor in sales development at a startup B2B software vendor, positioned as a champion rather than a buyer. Seniority is a poor fit for this company size (0/5), and the department is a core fit (5/5). No disqualifying rules fired, but the score is held to 1 because the title did not match a priority outreach target (1/5), and it is a champion-only contact rather than a buyer."
+`;
+
+exports[`rule engine evidence chains > case retired-sales-consultant produces stable evidence chain 1`] = `
+"# case: retired-sales-consultant
+# Retired sales consultant — not employed hard exclude
+# band: enterprise
+
+── parse.lead [SKIPPED IN FIXTURE] ──────────────────────────
+  seniority: ic
+  function: sales
+  primary_target: none
+  soft_exclude_role: none
+  is_decision_maker: false
+  is_champion_only: false
+  is_assistant_or_support: false
+  is_employed: false
+  company_kind: manufacturer_employer
+  parse_confidence: 0.88
+
+── lookup.size_band ────────────────────────
+  in:  {"employee_range":"10001+"}
+  out: {"band":"enterprise","mapping_notes":"employee_range 10001+ maps to enterprise band"}
+  » employee_range 10001+ maps to enterprise band
+
+── rule.hard_exclude ───────────────────────
+  rule: persona.hard_exclude.not_employed
+  ref:  Who NOT to Contact > Hard Exclusions
+  in:  {"features":{"seniority":"ic","function":"sales","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":false,"company_kind":"manufacturer_employer","parse_confidence":0.88},"band":"enterprise"}
+  out: {"excluded":true,"reason":"not employed (retired/advisor/consultant)"}
+  » Retired, advisor, or consultant roles have no buying power
+
+── rule.soft_exclude ───────────────────────
+  rule: persona.soft_exclude
+  ref:  Who NOT to Contact > Soft Exclusions
+  in:  {"features":{"seniority":"ic","function":"sales","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":false,"company_kind":"manufacturer_employer","parse_confidence":0.88}}
+  out: {"applied":false}
+  » No soft exclusion roles matched
+
+── rule.title_priority ─────────────────────
+  rule: persona.title_priority
+  ref:  Lead Targeting by Company Size
+  in:  {"features":{"seniority":"ic","function":"sales","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":false,"company_kind":"manufacturer_employer","parse_confidence":0.88},"band":"enterprise"}
+  out: {"priority":1,"matched_target":null}
+  » No primary title target matched; default priority 1/5
+
+── rule.seniority_matrix ───────────────────
+  rule: persona.seniority_matrix
+  ref:  Seniority Relevance Matrix
+  in:  {"seniority":"ic","band":"enterprise"}
+  out: {"relevance":1}
+  » Seniority ic at enterprise → relevance 1/5
+
+── score.final ─────────────────────────────
+  rule: scoring.composite
+  ref:  derived
+  in:  {"rule_outputs":{"hard_exclude":{"excluded":true,"reason":"not employed (retired/advisor/consultant)"},"soft_exclude":{"applied":false},"title_priority":{"priority":1,"matched_target":null},"seniority_matrix":{"relevance":1},"champion_penalty":0,"low_confidence_penalty":false,"department_weight":5}}
+  out: {"relevant":false,"score":0}
+  » Hard excluded: not employed (retired/advisor/consultant)
+
+── reasoning ─────────────────────────────────────────────────
+  Not relevant. Individual contributor in sales at an enterprise manufacturer. Excluded because retired, advisor, or consultant roles have no buying power."
+`;
+
+exports[`rule engine evidence chains > case smb-president-bwise produces stable evidence chain 1`] = `
+"# case: smb-president-bwise
+# SMB President at software company — not hard-excluded at SMB; soft title fit
+# band: smb
+
+── parse.lead [SKIPPED IN FIXTURE] ──────────────────────────
+  seniority: cLevel
+  function: executive
+  primary_target: owner_president
+  soft_exclude_role: none
+  is_decision_maker: true
+  is_champion_only: false
+  is_assistant_or_support: false
+  is_employed: true
+  company_kind: b2b_vendor
+  parse_confidence: 0.88
+
+── lookup.size_band ────────────────────────
+  in:  {"employee_range":"51-200"}
+  out: {"band":"smb","mapping_notes":"employee_range 51-200 maps to smb band"}
+  » employee_range 51-200 maps to smb band
+
+── rule.hard_exclude ───────────────────────
+  rule: persona.hard_exclude.function
+  ref:  Who NOT to Contact > Hard Exclusions
+  in:  {"features":{"seniority":"cLevel","function":"executive","primary_target":"owner_president","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.88},"band":"smb"}
+  out: {"excluded":false}
+  » No hard exclusion rules matched
+
+── rule.soft_exclude ───────────────────────
+  rule: persona.soft_exclude
+  ref:  Who NOT to Contact > Soft Exclusions
+  in:  {"features":{"seniority":"cLevel","function":"executive","primary_target":"owner_president","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.88}}
+  out: {"applied":false}
+  » No soft exclusion roles matched
+
+── rule.title_priority ─────────────────────
+  rule: persona.title_priority
+  ref:  Lead Targeting by Company Size
+  in:  {"features":{"seniority":"cLevel","function":"executive","primary_target":"owner_president","soft_exclude_role":"none","is_decision_maker":true,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"b2b_vendor","parse_confidence":0.88},"band":"smb"}
+  out: {"priority":1,"matched_target":null}
+  » No primary title target matched; default priority 1/5
+
+── rule.seniority_matrix ───────────────────
+  rule: persona.seniority_matrix
+  ref:  Seniority Relevance Matrix
+  in:  {"seniority":"cLevel","band":"smb"}
+  out: {"relevance":3}
+  » Seniority cLevel at smb → relevance 3/5
+
+── score.final ─────────────────────────────
+  rule: scoring.composite
+  ref:  derived
+  in:  {"rule_outputs":{"hard_exclude":{"excluded":false},"soft_exclude":{"applied":false},"title_priority":{"priority":1,"matched_target":null},"seniority_matrix":{"relevance":3},"champion_penalty":0,"low_confidence_penalty":false,"department_weight":1}}
+  out: {"relevant":true,"score":3}
+  » Composite: title=1/5 (×5), seniority=3/5 (×3), dept=1/5 (×1)
+
+── reasoning ─────────────────────────────────────────────────
+  Relevant · 3/10. C-level executive in executive leadership at an SMB B2B software vendor, and a likely decision-maker. Seniority is a moderate fit for this company size (3/5). No disqualifying rules fired, but the score is held to 3 because the title did not match a priority outreach target (1/5)."
+`;
+
+exports[`rule engine evidence chains > case steelcase-cfo-assistant produces stable evidence chain 1`] = `
+"# case: steelcase-cfo-assistant
+# Enterprise assistant to CFO at manufacturer — hard exclude support role
+# band: enterprise
+
+── parse.lead [SKIPPED IN FIXTURE] ──────────────────────────
+  seniority: ic
+  function: other
+  primary_target: none
+  soft_exclude_role: none
+  is_decision_maker: false
+  is_champion_only: false
+  is_assistant_or_support: true
+  is_employed: true
+  company_kind: manufacturer_employer
+  parse_confidence: 0.92
+
+── lookup.size_band ────────────────────────
+  in:  {"employee_range":"10001+"}
+  out: {"band":"enterprise","mapping_notes":"employee_range 10001+ maps to enterprise band"}
+  » employee_range 10001+ maps to enterprise band
+
+── rule.hard_exclude ───────────────────────
+  rule: persona.hard_exclude.support
+  ref:  Who NOT to Contact > Hard Exclusions
+  in:  {"features":{"seniority":"ic","function":"other","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":true,"is_employed":true,"company_kind":"manufacturer_employer","parse_confidence":0.92},"band":"enterprise"}
+  out: {"excluded":true,"reason":"assistant/support role"}
+  » Assistant or support staff are not decision-makers
+
+── rule.soft_exclude ───────────────────────
+  rule: persona.soft_exclude
+  ref:  Who NOT to Contact > Soft Exclusions
+  in:  {"features":{"seniority":"ic","function":"other","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":true,"is_employed":true,"company_kind":"manufacturer_employer","parse_confidence":0.92}}
+  out: {"applied":false}
+  » No soft exclusion roles matched
+
+── rule.title_priority ─────────────────────
+  rule: persona.title_priority
+  ref:  Lead Targeting by Company Size
+  in:  {"features":{"seniority":"ic","function":"other","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":true,"is_employed":true,"company_kind":"manufacturer_employer","parse_confidence":0.92},"band":"enterprise"}
+  out: {"priority":1,"matched_target":null}
+  » No primary title target matched; default priority 1/5
+
+── rule.seniority_matrix ───────────────────
+  rule: persona.seniority_matrix
+  ref:  Seniority Relevance Matrix
+  in:  {"seniority":"ic","band":"enterprise"}
+  out: {"relevance":1}
+  » Seniority ic at enterprise → relevance 1/5
+
+── score.final ─────────────────────────────
+  rule: scoring.composite
+  ref:  derived
+  in:  {"rule_outputs":{"hard_exclude":{"excluded":true,"reason":"assistant/support role"},"soft_exclude":{"applied":false},"title_priority":{"priority":1,"matched_target":null},"seniority_matrix":{"relevance":1},"champion_penalty":0,"low_confidence_penalty":false,"department_weight":1}}
+  out: {"relevant":false,"score":0}
+  » Hard excluded: assistant/support role
+
+── reasoning ─────────────────────────────────────────────────
+  Not relevant. Individual contributor at an enterprise manufacturer, in an assistant or support role. Excluded because assistant or support staff are not decision-makers."
+`;
+
+exports[`rule engine evidence chains > case steelcase-hr-manager produces stable evidence chain 1`] = `
+"# case: steelcase-hr-manager
+# HR manager at enterprise manufacturer — hard exclude by function
+# band: enterprise
+
+── parse.lead [SKIPPED IN FIXTURE] ──────────────────────────
+  seniority: manager
+  function: hr
+  primary_target: none
+  soft_exclude_role: none
+  is_decision_maker: false
+  is_champion_only: false
+  is_assistant_or_support: false
+  is_employed: true
+  company_kind: manufacturer_employer
+  parse_confidence: 0.9
+
+── lookup.size_band ────────────────────────
+  in:  {"employee_range":"10001+"}
+  out: {"band":"enterprise","mapping_notes":"employee_range 10001+ maps to enterprise band"}
+  » employee_range 10001+ maps to enterprise band
+
+── rule.hard_exclude ───────────────────────
+  rule: persona.hard_exclude.function
+  ref:  Who NOT to Contact > Hard Exclusions
+  in:  {"features":{"seniority":"manager","function":"hr","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"manufacturer_employer","parse_confidence":0.9},"band":"enterprise"}
+  out: {"excluded":true,"reason":"wrong department: hr"}
+  » Hard exclusion: hr department
+
+── rule.soft_exclude ───────────────────────
+  rule: persona.soft_exclude
+  ref:  Who NOT to Contact > Soft Exclusions
+  in:  {"features":{"seniority":"manager","function":"hr","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"manufacturer_employer","parse_confidence":0.9}}
+  out: {"applied":false}
+  » No soft exclusion roles matched
+
+── rule.title_priority ─────────────────────
+  rule: persona.title_priority
+  ref:  Lead Targeting by Company Size
+  in:  {"features":{"seniority":"manager","function":"hr","primary_target":"none","soft_exclude_role":"none","is_decision_maker":false,"is_champion_only":false,"is_assistant_or_support":false,"is_employed":true,"company_kind":"manufacturer_employer","parse_confidence":0.9},"band":"enterprise"}
+  out: {"priority":1,"matched_target":null}
+  » No primary title target matched; default priority 1/5
+
+── rule.seniority_matrix ───────────────────
+  rule: persona.seniority_matrix
+  ref:  Seniority Relevance Matrix
+  in:  {"seniority":"manager","band":"enterprise"}
+  out: {"relevance":3}
+  » Seniority manager at enterprise → relevance 3/5
+
+── score.final ─────────────────────────────
+  rule: scoring.composite
+  ref:  derived
+  in:  {"rule_outputs":{"hard_exclude":{"excluded":true,"reason":"wrong department: hr"},"soft_exclude":{"applied":false},"title_priority":{"priority":1,"matched_target":null},"seniority_matrix":{"relevance":3},"champion_penalty":0,"low_confidence_penalty":false,"department_weight":0}}
+  out: {"relevant":false,"score":0}
+  » Hard excluded: wrong department: hr
+
+── reasoning ─────────────────────────────────────────────────
+  Not relevant. Manager in HR at an enterprise manufacturer. Excluded because hard exclusion: hr department."
+`;
