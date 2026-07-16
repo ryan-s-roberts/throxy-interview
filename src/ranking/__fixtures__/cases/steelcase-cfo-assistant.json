@@ -1,0 +1,21 @@
+{
+  "id": "steelcase-cfo-assistant",
+  "description": "Enterprise assistant to CFO at manufacturer \u2014 hard exclude support role",
+  "spec_refs": [
+    "Who NOT to Contact > Hard Exclusions"
+  ],
+  "employee_range": "10001+",
+  "job_title": "Senior Executive Assistant: Chief Financial Officer",
+  "features": {
+    "seniority": "ic",
+    "function": "other",
+    "primary_target": "none",
+    "soft_exclude_role": "none",
+    "is_decision_maker": false,
+    "is_champion_only": false,
+    "is_assistant_or_support": true,
+    "is_employed": true,
+    "company_kind": "manufacturer_employer",
+    "parse_confidence": 0.92
+  }
+}

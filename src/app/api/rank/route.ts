@@ -1,34 +1,29 @@
 import { NextResponse } from "next/server";
 import { LEADS } from "@/data/leads";
-import { PERSONA_SPEC } from "@/data/persona";
-import type { RankResponse, ApiError, RankingResult } from "@/types";
+import { LlmEnvError } from "@/ranking/llm/llm-env";
+import { parseLeadBatch } from "@/ranking/llm/parse";
+import { scoreLeadFromParsed, toRankingResult } from "@/ranking/domain/pipeline";
+import type { RankResponse, ApiError } from "@/types";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
-/**
- * POST /api/rank
- *
- * Rank all leads against the persona spec using AI.
- *
- * This is the main endpoint you need to implement. Your job:
- *
- * 1. Design a prompt strategy that evaluates leads against the persona spec.
- *    Consider: what does the AI need to know to judge relevance and fit?
- *
- * 2. Call an AI provider to rank the leads.
- *
- * 3. Return results matching the RankingResult type: for each lead, whether
- *    they're relevant, a score (1-10), and a short reasoning.
- *
- * Available data:
- *   LEADS        — all leads loaded from the CSV (see src/types for the shape)
- *   PERSONA_SPEC — the full persona spec as a markdown string
- *
- * The frontend is already wired to call this route and display results.
- */
 export async function POST(): Promise<NextResponse<RankResponse | ApiError>> {
-  // TODO: implement your ranking logic here
+  try {
+    const parseResults = await parseLeadBatch(LEADS);
 
-  return NextResponse.json({ error: "Not implemented" }, { status: 501 });
+    const results = LEADS.map((lead) => {
+      const parseStep = parseResults.get(lead.id);
+      if (!parseStep) {
+        throw new Error(`Missing parse result for ${lead.id}`);
+      }
+      return toRankingResult(scoreLeadFromParsed(lead, parseStep));
+    });
+
+    return NextResponse.json({ results });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Ranking failed";
+    const status = error instanceof LlmEnvError ? 503 : 500;
+    return NextResponse.json({ error: message }, { status });
+  }
 }

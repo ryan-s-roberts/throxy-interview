@@ -1,0 +1,21 @@
+{
+  "id": "elche-government-president",
+  "description": "Government official President at municipality \u2014 CEO/exec at enterprise hard exclude",
+  "spec_refs": [
+    "Who NOT to Contact > Hard Exclusions"
+  ],
+  "employee_range": "1001-5000",
+  "job_title": "Presidenta del Tribunal Econ\u00f3mico-Administrativo Municipal de Elche.",
+  "features": {
+    "seniority": "cLevel",
+    "function": "executive",
+    "primary_target": "owner_president",
+    "soft_exclude_role": "none",
+    "is_decision_maker": true,
+    "is_champion_only": false,
+    "is_assistant_or_support": false,
+    "is_employed": true,
+    "company_kind": "government",
+    "parse_confidence": 0.9
+  }
+}

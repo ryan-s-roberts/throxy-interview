@@ -58,7 +58,28 @@ export function LeadsTable({ leads, results }: Props) {
                       {result ? (result.relevant ? "Yes" : "No") : "—"}
                     </td>
                     <td className="score">{result?.relevant ? result.score : "—"}</td>
-                    <td className="reasoning">{result?.reasoning ?? "—"}</td>
+                    <td className="reasoning">
+                      {result ? (
+                        <>
+                          <p className="reasoning-prose">{result.reasoning}</p>
+                          {result.steps && result.steps.length > 0 && (
+                            <details className="why">
+                              <summary>Why?</summary>
+                              <ul className="reasoning-chain">
+                                {result.steps.map((step, i) => (
+                                  <li key={i} className={`step ${step.kind}`}>
+                                    <span className="step-label">{step.label}</span>
+                                    <span className="step-detail">{step.detail}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </details>
+                          )}
+                        </>
+                      ) : (
+                        "—"
+                      )}
+                    </td>
                   </>
                 )}
               </tr>

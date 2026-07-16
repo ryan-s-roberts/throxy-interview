@@ -1,0 +1,21 @@
+{
+  "id": "garbage-title-employed",
+  "description": "Garbage title with low confidence \u2014 conservative exclude path",
+  "spec_refs": [
+    "Lead Targeting by Company Size"
+  ],
+  "employee_range": "10001+",
+  "job_title": "employed",
+  "features": {
+    "seniority": "unknown",
+    "function": "other",
+    "primary_target": "none",
+    "soft_exclude_role": "none",
+    "is_decision_maker": false,
+    "is_champion_only": false,
+    "is_assistant_or_support": false,
+    "is_employed": true,
+    "company_kind": "manufacturer_employer",
+    "parse_confidence": 0.15
+  }
+}

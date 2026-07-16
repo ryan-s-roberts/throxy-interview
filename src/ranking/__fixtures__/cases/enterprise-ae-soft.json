@@ -1,0 +1,19 @@
+{
+  "id": "enterprise-ae-soft",
+  "description": "Enterprise Account Executive — soft exclusion (closer, not outbound owner)",
+  "spec_refs": ["Who NOT to Contact > Soft Exclusions"],
+  "employee_range": "1001-5000",
+  "job_title": "Account Executive",
+  "features": {
+    "seniority": "ic",
+    "function": "sales",
+    "primary_target": "none",
+    "soft_exclude_role": "account_executive",
+    "is_decision_maker": false,
+    "is_champion_only": false,
+    "is_assistant_or_support": false,
+    "is_employed": true,
+    "company_kind": "b2b_vendor",
+    "parse_confidence": 0.9
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "inside-sales-startup",
+  "description": "Inside Sales at startup \u2014 champion multi-thread contact (no primary target)",
+  "spec_refs": [
+    "Lead Targeting by Company Size",
+    "Champions"
+  ],
+  "employee_range": "11-50",
+  "job_title": "Inside Sales",
+  "features": {
+    "seniority": "ic",
+    "function": "salesDev",
+    "primary_target": "none",
+    "soft_exclude_role": "none",
+    "is_decision_maker": false,
+    "is_champion_only": true,
+    "is_assistant_or_support": false,
+    "is_employed": true,
+    "company_kind": "b2b_vendor",
+    "parse_confidence": 0.8
+  }
+}

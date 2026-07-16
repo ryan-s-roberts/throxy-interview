@@ -1,0 +1,22 @@
+{
+  "id": "allie-founder-ceo",
+  "description": "Startup founder/CEO at B2B vendor selling to manufacturing \u2014 strong positive",
+  "spec_refs": [
+    "Lead Targeting by Company Size",
+    "Seniority Relevance Matrix"
+  ],
+  "employee_range": "11-50",
+  "job_title": "Founder & CEO",
+  "features": {
+    "seniority": "founder",
+    "function": "executive",
+    "primary_target": "founder",
+    "soft_exclude_role": "none",
+    "is_decision_maker": true,
+    "is_champion_only": false,
+    "is_assistant_or_support": false,
+    "is_employed": true,
+    "company_kind": "b2b_vendor",
+    "parse_confidence": 0.95
+  }
+}
